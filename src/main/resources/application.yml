@@ -21,3 +21,19 @@ spring:
     store-type: jdbc
     jdbc:
       initialize-schema: always
+  security:
+    oauth2:
+      client:
+        registration:
+          ssoclient:
+            provider: ssoserver
+            client-id: ${OAUTH_CLIENT_ID}
+            client-secret: ${OAUTH_CLIENT_SECRET}
+            authorization-grant-type: authorization_code
+            scope: openid,profile,message
+        provider:
+          ssoserver:
+            issuer-uri: ${AUTH_SERVER_URL}
+
+auth-server:
+  url: ${AUTH_SERVER_URL}
