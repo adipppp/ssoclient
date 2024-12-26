@@ -7,8 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestClientException;
 
 import com.stackjs.ssoclient.dto.MessageDto;
 
@@ -27,14 +27,14 @@ public class MessageService {
         this.resourceServerUrl = resourceServerUrl;
     }
 
-    public List<MessageDto> findAll() throws HttpStatusCodeException, RuntimeException {
+    public List<MessageDto> findAll() throws RestClientException, RuntimeException {
         MessageDto[] messageDtos;
         try {
             messageDtos = restClient.get()
                     .uri(resourceServerUrl + "/messages")
                     .retrieve()
                     .body(MessageDto[].class);
-        } catch (HttpStatusCodeException exception) {
+        } catch (RestClientException exception) {
             logger.error(exception.getMessage(), exception);
             throw exception;
         } catch (RuntimeException exception) {
@@ -45,14 +45,32 @@ public class MessageService {
         return Arrays.asList(messageDtos);
     }
 
-    public MessageDto findById(long id) throws HttpStatusCodeException, RuntimeException {
+    public MessageDto findById(long id) throws RestClientException, RuntimeException {
         MessageDto messageDto;
         try {
             messageDto = restClient.get()
                     .uri(resourceServerUrl + "/messages/" + id)
                     .retrieve()
                     .body(MessageDto.class);
-        } catch (HttpStatusCodeException exception) {
+        } catch (RestClientException exception) {
+            logger.error(exception.getMessage(), exception);
+            throw exception;
+        } catch (RuntimeException exception) {
+            logger.error(exception.getMessage(), exception);
+            throw exception;
+        }
+
+        return messageDto;
+    }
+
+    public MessageDto save(MessageDto messageDto) throws RestClientException, RuntimeException {
+        try {
+            restClient.post()
+                    .uri(resourceServerUrl + "/messages")
+                    .body(messageDto)
+                    .retrieve()
+                    .toBodilessEntity();
+        } catch (RestClientException exception) {
             logger.error(exception.getMessage(), exception);
             throw exception;
         } catch (RuntimeException exception) {
