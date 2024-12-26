@@ -1,9 +1,10 @@
 package com.stackjs.ssoclient.dto;
 
 import lombok.Getter;
+import lombok.Setter;
 
-@Getter
+@Getter @Setter
 public class MessageDto {
-    private long id;
+    private Long id;
     private String content;
 }
