@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marmut</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand mr-auto" th:href="@{/messages#}">Marmut</a>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="text-center mb-4">
+              <h2>Inbox</h2>
+            </div>
+            <a th:href="@{/messages/add}" class="btn btn-primary w-100">Add Message</a>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="text-align: center">Id</th>
+                    <th style="text-align: center">Contents</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="message : ${messages}">
+                    <td
+                      style="
+                        max-width: 200px;
+                        word-wrap: break-word;
+                        text-align: center;
+                      "
+                      th:text="${message.id}"
+                    ></td>
+                    <td
+                      style="text-align: center"
+                      th:text="${message.content}"
+                    ></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
