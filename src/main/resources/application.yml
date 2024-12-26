@@ -30,10 +30,13 @@ spring:
             client-id: ${OAUTH_CLIENT_ID}
             client-secret: ${OAUTH_CLIENT_SECRET}
             authorization-grant-type: authorization_code
-            scope: openid,profile,message
+            scope: openid,profile,messages
         provider:
           ssoserver:
             issuer-uri: ${AUTH_SERVER_URL}
 
 auth-server:
   url: ${AUTH_SERVER_URL}
+
+resource-server:
+  url: ${RESOURCE_SERVER_URL}
