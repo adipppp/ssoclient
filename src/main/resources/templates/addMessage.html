@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marmut</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand mr-auto" th:href="@{/messages#}">Marmut</a>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div th:if="${error}" class="alert alert-danger" role="alert">
+            <h1 th:text="${error}" class="m-0 text-center"></h1>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h2 class="text-center">Create Album</h2>
+            </div>
+            <div class="card-body">
+              <form method="post" action="#" th:action="@{/messages/add}" th:object="${message}">
+                <div class="mb-3">
+                  <label for="message-content" class="form-label"
+                    >Contents</label
+                  >
+                  <input
+                    th:field="*{content}"
+                    type="text"
+                    class="form-control"
+                    id="message-content"
+                    name="message-content"
+                  />
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary btn-block">
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
